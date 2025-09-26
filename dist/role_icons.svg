@@ -1,0 +1,94 @@
+<svg width="400" height="300" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="lyricistGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9933;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#CC0033;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="singerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#339933;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF9933;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="producerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3366CC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#339933;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="composerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#CC0033;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3366CC;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="musicianGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9933;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#339933;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="influencerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#339933;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3366CC;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="promoterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3366CC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#CC0033;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="labelGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#CC0033;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF9933;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="youtuberGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF9933;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3366CC;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Lyricist Icon -->
+  <g transform="translate(50, 50)">
+    <circle cx="0" cy="0" r="20" fill="url(#lyricistGradient)"/>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="bold">✍️</text>
+  </g>
+  
+  <!-- Singer Icon -->
+  <g transform="translate(150, 50)">
+    <circle cx="0" cy="0" r="20" fill="url(#singerGradient)"/>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="bold">🎤</text>
+  </g>
+  
+  <!-- Producer Icon -->
+  <g transform="translate(250, 50)">
+    <circle cx="0" cy="0" r="20" fill="url(#producerGradient)"/>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="bold">🎛️</text>
+  </g>
+  
+  <!-- Composer Icon -->
+  <g transform="translate(350, 50)">
+    <circle cx="0" cy="0" r="20" fill="url(#composerGradient)"/>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="bold">🎼</text>
+  </g>
+  
+  <!-- Musician Icon -->
+  <g transform="translate(50, 150)">
+    <circle cx="0" cy="0" r="20" fill="url(#musicianGradient)"/>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="bold">🎸</text>
+  </g>
+  
+  <!-- Influencer Icon -->
+  <g transform="translate(150, 150)">
+    <circle cx="0" cy="0" r="20" fill="url(#influencerGradient)"/>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="bold">📱</text>
+  </g>
+  
+  <!-- Promoter Icon -->
+  <g transform="translate(250, 150)">
+    <circle cx="0" cy="0" r="20" fill="url(#promoterGradient)"/>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="bold">🎪</text>
+  </g>
+  
+  <!-- Label Icon -->
+  <g transform="translate(350, 150)">
+    <circle cx="0" cy="0" r="20" fill="url(#labelGradient)"/>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="bold">🏢</text>
+  </g>
+  
+  <!-- YouTuber Icon -->
+  <g transform="translate(200, 250)">
+    <circle cx="0" cy="0" r="20" fill="url(#youtuberGradient)"/>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="bold">📺</text>
+  </g>
+</svg>

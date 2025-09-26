@@ -1,0 +1,36 @@
+{
+  "name": "punjabi-music-collaboration",
+  "version": "1.0.0",
+  "description": "A vibrant mobile app for Punjabi Music Collaboration Platform",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 3000 -c-1",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "postcss src/css/*.css -d dist/css",
+    "build:js": "webpack --mode production",
+    "dev": "http-server -p 3000 -c-1 -o",
+    "deploy": "gh-pages -d ."
+  },
+  "keywords": [
+    "punjabi",
+    "music",
+    "collaboration",
+    "mobile",
+    "app",
+    "ui",
+    "ux"
+  ],
+  "author": "Punjabi Music Collaboration Team",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "gh-pages": "^6.0.0",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0",
+    "autoprefixer": "^10.4.16",
+    "cssnano": "^6.0.1",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Setup - Punjabi Music Collaboration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&family=Noto+Sans+Punjabi:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 390px;
+            height: 844px;
+            margin: 0 auto;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FFF5E1 0%, #FF9933 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .profile-form {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 20px;
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            color: #333333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #FF9933, #CC0033);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .photo-upload {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .photo-preview {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #F5F5F5;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px dashed #E0E0E0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-preview:hover {
+            border-color: #FF9933;
+            background: #FFF5E1;
+        }
+
+        .photo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .photo-placeholder {
+            color: #999999;
+            font-size: 14px;
+        }
+
+        .upload-btn {
+            background: linear-gradient(45deg, #FF9933, #CC0033);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 153, 51, 0.3);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #FF9933;
+            box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.1);
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            background: white;
+            resize: vertical;
+            min-height: 80px;
+            transition: all 0.3s ease;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #FF9933;
+            box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.1);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #FF9933;
+            box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.1);
+        }
+
+        .portfolio-upload {
+            border: 2px dashed #E0E0E0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 16px;
+        }
+
+        .portfolio-upload:hover {
+            border-color: #FF9933;
+            background: #FFF5E1;
+        }
+
+        .portfolio-upload.dragover {
+            border-color: #FF9933;
+            background: #FFF5E1;
+        }
+
+        .upload-icon {
+            font-size: 32px;
+            color: #999999;
+            margin-bottom: 8px;
+        }
+
+        .upload-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 4px;
+        }
+
+        .upload-subtext {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .portfolio-items {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .portfolio-item {
+            background: #F5F5F5;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            position: relative;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .portfolio-item-name {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            color: #333333;
+        }
+
+        .remove-item {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: #CC0033;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .credit-section {
+            background: linear-gradient(135deg, #FF9933, #CC0033);
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .credit-balance {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .credit-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            margin-bottom: 16px;
+            opacity: 0.9;
+        }
+
+        .credit-packages {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .credit-package {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .credit-package:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .continue-btn {
+            background: linear-gradient(45deg, #FF9933, #CC0033);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            box-shadow: 0 4px 16px rgba(255, 153, 51, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 153, 51, 0.4);
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .back-icon {
+            color: #333333;
+            font-size: 18px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF9933, #CC0033);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+            width: 60%;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <button class="back-btn">
+            <span class="back-icon">←</span>
+        </button>
+
+        <div class="header">
+            <h1>Complete Your Profile</h1>
+            <p>Help others discover your musical talent</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <div class="profile-form">
+            <!-- Profile Photo Section -->
+            <div class="form-section">
+                <div class="section-title">
+                    <div class="section-icon">📸</div>
+                    Profile Photo
+                </div>
+                <div class="photo-upload">
+                    <div class="photo-preview" onclick="document.getElementById('photoInput').click()">
+                        <div class="photo-placeholder">Tap to upload photo</div>
+                    </div>
+                    <input type="file" id="photoInput" accept="image/*" style="display: none;">
+                    <button class="upload-btn" onclick="document.getElementById('photoInput').click()">
+                        Upload Photo
+                    </button>
+                </div>
+            </div>
+
+            <!-- Basic Information Section -->
+            <div class="form-section">
+                <div class="section-title">
+                    <div class="section-icon">👤</div>
+                    Basic Information
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-input" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Bio</label>
+                    <textarea class="form-textarea" placeholder="Tell us about yourself and your musical journey"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Genre</label>
+                    <select class="form-select">
+                        <option value="">Select your primary genre</option>
+                        <option value="punjabi">Punjabi</option>
+                        <option value="bollywood">Bollywood</option>
+                        <option value="folk">Folk</option>
+                        <option value="pop">Pop</option>
+                        <option value="hip-hop">Hip-Hop</option>
+                        <option value="classical">Classical</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Language</label>
+                    <select class="form-select">
+                        <option value="">Select primary language</option>
+                        <option value="punjabi">Punjabi</option>
+                        <option value="hindi">Hindi</option>
+                        <option value="english">English</option>
+                        <option value="urdu">Urdu</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Portfolio Section -->
+            <div class="form-section">
+                <div class="section-title">
+                    <div class="section-icon">🎵</div>
+                    Portfolio
+                </div>
+                <div class="portfolio-upload" onclick="document.getElementById('portfolioInput').click()">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">Upload Your Work</div>
+                    <div class="upload-subtext">Music, videos, images (Max 10MB each)</div>
+                </div>
+                <input type="file" id="portfolioInput" accept="audio/*,video/*,image/*" multiple style="display: none;">
+                <div class="portfolio-items" id="portfolioItems">
+                    <!-- Portfolio items will be added here dynamically -->
+                </div>
+            </div>
+
+            <!-- Credits Section -->
+            <div class="credit-section">
+                <div class="credit-balance">500 Credits</div>
+                <div class="credit-text">Start collaborating with your credits</div>
+                <div class="credit-packages">
+                    <div class="credit-package">+100 Credits</div>
+                    <div class="credit-package">+500 Credits</div>
+                    <div class="credit-package">+1000 Credits</div>
+                </div>
+            </div>
+        </div>
+
+        <button class="continue-btn" onclick="completeProfile()">
+            Complete Profile
+        </button>
+    </div>
+
+    <script>
+        // Photo upload functionality
+        document.getElementById('photoInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const photoPreview = document.querySelector('.photo-preview');
+                    photoPreview.innerHTML = `<img src="${e.target.result}" alt="Profile Photo">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Portfolio upload functionality
+        document.getElementById('portfolioInput').addEventListener('change', function(e) {
+            const files = Array.from(e.target.files);
+            const portfolioItems = document.getElementById('portfolioItems');
+            
+            files.forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const portfolioItem = document.createElement('div');
+                    portfolioItem.className = 'portfolio-item';
+                    
+                    if (file.type.startsWith('image/')) {
+                        portfolioItem.innerHTML = `
+                            <img src="${e.target.result}" alt="Portfolio item">
+                            <div class="portfolio-item-name">${file.name}</div>
+                            <button class="remove-item" onclick="this.parentElement.remove()">×</button>
+                        `;
+                    } else if (file.type.startsWith('audio/')) {
+                        portfolioItem.innerHTML = `
+                            <div style="height: 80px; background: #FF9933; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin-bottom: 8px;">🎵</div>
+                            <div class="portfolio-item-name">${file.name}</div>
+                            <button class="remove-item" onclick="this.parentElement.remove()">×</button>
+                        `;
+                    } else if (file.type.startsWith('video/')) {
+                        portfolioItem.innerHTML = `
+                            <div style="height: 80px; background: #339933; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; margin-bottom: 8px;">🎬</div>
+                            <div class="portfolio-item-name">${file.name}</div>
+                            <button class="remove-item" onclick="this.parentElement.remove()">×</button>
+                        `;
+                    }
+                    
+                    portfolioItems.appendChild(portfolioItem);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+        // Drag and drop functionality
+        const portfolioUpload = document.querySelector('.portfolio-upload');
+        
+        portfolioUpload.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('dragover');
+        });
+        
+        portfolioUpload.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+        });
+        
+        portfolioUpload.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('dragover');
+            
+            const files = Array.from(e.dataTransfer.files);
+            const portfolioInput = document.getElementById('portfolioInput');
+            portfolioInput.files = e.dataTransfer.files;
+            portfolioInput.dispatchEvent(new Event('change'));
+        });
+
+        function completeProfile() {
+            alert('Profile completed successfully! Redirecting to dashboard...');
+            // Here you would navigate to the dashboard
+            // window.location.href = 'dashboard.html';
+        }
+
+        // Form validation
+        document.querySelectorAll('.form-input, .form-textarea, .form-select').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value.trim() === '') {
+                    this.style.borderColor = '#CC0033';
+                } else {
+                    this.style.borderColor = '#E0E0E0';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

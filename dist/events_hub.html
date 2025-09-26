@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Hub - Punjabi Music Collaboration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&family=Noto+Sans+Punjabi:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 390px;
+            height: 844px;
+            margin: 0 auto;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FFF5E1 0%, #FF9933 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .events-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #CC0033, #FF9933);
+            padding: 20px;
+            color: white;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .back-icon {
+            color: white;
+            font-size: 18px;
+        }
+
+        .header-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .filter-section {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            overflow-x: auto;
+        }
+
+        .filter-tab {
+            background: #F5F5F5;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            color: #666666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .filter-tab.active {
+            background: #CC0033;
+            color: white;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #F5F5F5;
+            border-radius: 8px;
+            padding: 12px 16px;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-icon {
+            color: #999999;
+            margin-right: 8px;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .event-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .event-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .event-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #CC0033, #FF9933);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .event-info {
+            flex: 1;
+        }
+
+        .event-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .event-type {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: #CC0033;
+            margin-bottom: 2px;
+        }
+
+        .event-location {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .event-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .detail-item {
+            text-align: center;
+            background: #F9F9F9;
+            border-radius: 8px;
+            padding: 12px 8px;
+        }
+
+        .detail-number {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: #333333;
+            margin-bottom: 2px;
+        }
+
+        .detail-label {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 10px;
+            color: #666666;
+        }
+
+        .event-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            background: #FFE8E8;
+            color: #CC0033;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .event-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn {
+            background: #F5F5F5;
+            color: #666666;
+            border: 2px solid #E0E0E0;
+        }
+
+        .view-btn:hover {
+            background: #FFE8E8;
+            border-color: #CC0033;
+            color: #CC0033;
+        }
+
+        .book-btn {
+            background: linear-gradient(45deg, #CC0033, #FF9933);
+            color: white;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(204, 0, 51, 0.3);
+        }
+
+        .service-providers {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .service-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            color: #333333;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .service-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #CC0033, #FF9933);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .service-item {
+            background: #F9F9F9;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .service-item:hover {
+            border-color: #CC0033;
+            background: #FFE8E8;
+        }
+
+        .service-item-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .service-item-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .service-item-desc {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .premium-ads {
+            background: linear-gradient(135deg, #CC0033, #FF9933);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .premium-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .premium-desc {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            margin-bottom: 16px;
+            opacity: 0.9;
+        }
+
+        .premium-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .premium-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .floating-action {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #CC0033, #FF9933);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(204, 0, 51, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .floating-action:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(204, 0, 51, 0.4);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="events-container">
+        <div class="header">
+            <div class="header-content">
+                <button class="back-btn">
+                    <span class="back-icon">←</span>
+                </button>
+                <div class="header-title">Events Hub</div>
+                <div></div>
+            </div>
+            
+            <div class="filter-section">
+                <div class="filter-tabs">
+                    <button class="filter-tab active">All Events</button>
+                    <button class="filter-tab">Music Launches</button>
+                    <button class="filter-tab">Movie Launches</button>
+                    <button class="filter-tab">Company Events</button>
+                    <button class="filter-tab">Conferences</button>
+                </div>
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" placeholder="Search events, companies, venues...">
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="service-providers">
+                <div class="service-title">
+                    <div class="service-icon">🏢</div>
+                    Service Providers
+                </div>
+                <div class="service-grid">
+                    <div class="service-item" onclick="viewServiceProvider('YouTube Channels')">
+                        <div class="service-item-icon">📺</div>
+                        <div class="service-item-title">YouTube Channels</div>
+                        <div class="service-item-desc">Music promotion channels</div>
+                    </div>
+                    <div class="service-item" onclick="viewServiceProvider('Media Companies')">
+                        <div class="service-item-icon">📰</div>
+                        <div class="service-item-title">Media Companies</div>
+                        <div class="service-item-desc">Press & publicity</div>
+                    </div>
+                    <div class="service-item" onclick="viewServiceProvider('Event Planners')">
+                        <div class="service-item-icon">🎪</div>
+                        <div class="service-item-title">Event Planners</div>
+                        <div class="service-item-desc">Professional event management</div>
+                    </div>
+                    <div class="service-item" onclick="viewServiceProvider('Recording Studios')">
+                        <div class="service-item-icon">🎙️</div>
+                        <div class="service-item-title">Recording Studios</div>
+                        <div class="service-item-desc">Professional recording</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="events-grid" id="eventsGrid">
+                <div class="event-card" onclick="viewEventDetails('Punjabi Album Launch')">
+                    <div class="event-header">
+                        <div class="event-avatar">PA</div>
+                        <div class="event-info">
+                            <div class="event-title">Punjabi Album Launch</div>
+                            <div class="event-type">Music Launch</div>
+                            <div class="event-location">📍 Mumbai, India</div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-details">
+                        <div class="detail-item">
+                            <div class="detail-number">Dec 20</div>
+                            <div class="detail-label">Date</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-number">6:00 PM</div>
+                            <div class="detail-label">Time</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-number">Free</div>
+                            <div class="detail-label">Entry</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-number">500</div>
+                            <div class="detail-label">Capacity</div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-tags">
+                        <span class="tag">Punjabi</span>
+                        <span class="tag">Album Launch</span>
+                        <span class="tag">Music Industry</span>
+                    </div>
+                    
+                    <div class="event-actions">
+                        <button class="action-btn view-btn">View Details</button>
+                        <button class="action-btn book-btn">Register</button>
+                    </div>
+                </div>
+
+                <div class="event-card" onclick="viewEventDetails('Bollywood Movie Launch')">
+                    <div class="event-header">
+                        <div class="event-avatar">BM</div>
+                        <div class="event-info">
+                            <div class="event-title">Bollywood Movie Launch</div>
+                            <div class="event-type">Movie Launch</div>
+                            <div class="event-location">📍 Delhi, India</div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-details">
+                        <div class="detail-item">
+                            <div class="detail-number">Dec 25</div>
+                            <div class="detail-label">Date</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-number">7:30 PM</div>
+                            <div class="detail-label">Time</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-number">Invite Only</div>
+                            <div class="detail-label">Entry</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-number">200</div>
+                            <div class="detail-label">Capacity</div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-tags">
+                        <span class="tag">Bollywood</span>
+                        <span class="tag">Movie Launch</span>
+                        <span class="tag">Entertainment</span>
+                    </div>
+                    
+                    <div class="event-actions">
+                        <button class="action-btn view-btn">View Details</button>
+                        <button class="action-btn book-btn">Request Invite</button>
+                    </div>
+                </div>
+
+                <div class="event-card" onclick="viewEventDetails('Music Industry Conference')">
+                    <div class="event-header">
+                        <div class="event-avatar">MC</div>
+                        <div class="event-info">
+                            <div class="event-title">Music Industry Conference</div>
+                            <div class="event-type">Conference</div>
+                            <div class="event-location">📍 Chandigarh, India</div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-details">
+                        <div class="detail-item">
+                            <div class="detail-number">Jan 15</div>
+                            <div class="detail-label">Date</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-number">9:00 AM</div>
+                            <div class="detail-label">Time</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-number">₹2,000</div>
+                            <div class="detail-label">Entry</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-number">300</div>
+                            <div class="detail-label">Capacity</div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-tags">
+                        <span class="tag">Conference</span>
+                        <span class="tag">Networking</span>
+                        <span class="tag">Industry</span>
+                    </div>
+                    
+                    <div class="event-actions">
+                        <button class="action-btn view-btn">View Details</button>
+                        <button class="action-btn book-btn">Buy Ticket</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="premium-ads">
+                <div class="premium-title">Premium Featured Ads</div>
+                <div class="premium-desc">Get maximum visibility for your events and services</div>
+                <button class="premium-btn">Create Featured Ad</button>
+            </div>
+        </div>
+
+        <button class="floating-action" onclick="createNewEvent()">+</button>
+    </div>
+
+    <script>
+        function viewServiceProvider(providerName) {
+            alert(`Viewing ${providerName} directory...`);
+        }
+
+        function viewEventDetails(eventName) {
+            alert(`Viewing details for ${eventName}`);
+        }
+
+        function createNewEvent() {
+            alert('Creating new event...');
+        }
+
+        // Filter tabs functionality
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Here you would filter the events based on the selected tab
+                console.log('Filtering by:', this.textContent);
+            });
+        });
+
+        // Book button functionality
+        document.querySelectorAll('.book-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                alert('Opening booking form...');
+            });
+        });
+
+        // View details button functionality
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                alert('Opening event details...');
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const eventCards = document.querySelectorAll('.event-card');
+            
+            eventCards.forEach(card => {
+                const eventTitle = card.querySelector('.event-title').textContent.toLowerCase();
+                const eventType = card.querySelector('.event-type').textContent.toLowerCase();
+                const eventLocation = card.querySelector('.event-location').textContent.toLowerCase();
+                
+                if (eventTitle.includes(searchTerm) || eventType.includes(searchTerm) || eventLocation.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Premium ad button
+        document.querySelector('.premium-btn').addEventListener('click', function() {
+            alert('Opening premium ad creation form...');
+        });
+    </script>
+</body>
+</html>

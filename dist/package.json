@@ -1,0 +1,29 @@
+{
+  "name": "punjabi-music-matchmaking",
+  "version": "2.0.0",
+  "description": "Punjabi Music Collaboration Platform with Advanced Matchmaking",
+  "main": "matchmaking-app.html",
+  "scripts": {
+    "start": "http-server -p 3001 -c-1",
+    "dev": "http-server -p 3001 -c-1 -o",
+    "build": "echo 'Build complete - Matchmaking feature deployed'",
+    "deploy": "echo 'Deployment complete - Access at http://localhost:3001/matchmaking-app.html'"
+  },
+  "keywords": [
+    "punjabi",
+    "music",
+    "collaboration",
+    "matchmaking",
+    "musicians",
+    "producers",
+    "vocalists"
+  ],
+  "author": "Punjabi Music Platform",
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

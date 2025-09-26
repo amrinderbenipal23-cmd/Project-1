@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Influencer Marketplace - Punjabi Music Collaboration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&family=Noto+Sans+Punjabi:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 390px;
+            height: 844px;
+            margin: 0 auto;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FFF5E1 0%, #FF9933 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .marketplace-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #339933, #FF9933);
+            padding: 20px;
+            color: white;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .back-icon {
+            color: white;
+            font-size: 18px;
+        }
+
+        .header-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .search-section {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: #F5F5F5;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-icon {
+            color: #999999;
+            margin-right: 8px;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .filter-tab {
+            background: #F5F5F5;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            color: #666666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .filter-tab.active {
+            background: #339933;
+            color: white;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .influencers-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .influencer-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .influencer-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .influencer-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .influencer-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #339933, #FF9933);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .influencer-info {
+            flex: 1;
+        }
+
+        .influencer-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .influencer-niche {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: #339933;
+            margin-bottom: 2px;
+        }
+
+        .influencer-location {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .influencer-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: #F9F9F9;
+            border-radius: 8px;
+            padding: 12px 8px;
+        }
+
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: #333333;
+            margin-bottom: 2px;
+        }
+
+        .stat-label {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 10px;
+            color: #666666;
+        }
+
+        .influencer-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .tag {
+            background: #E8F5E8;
+            color: #339933;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .pricing-section {
+            background: #F9F9F9;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 16px;
+        }
+
+        .pricing-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 8px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .pricing-item {
+            text-align: center;
+        }
+
+        .pricing-amount {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333333;
+        }
+
+        .pricing-type {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 10px;
+            color: #666666;
+        }
+
+        .influencer-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn {
+            background: #F5F5F5;
+            color: #666666;
+            border: 2px solid #E0E0E0;
+        }
+
+        .view-btn:hover {
+            background: #E8F5E8;
+            border-color: #339933;
+            color: #339933;
+        }
+
+        .book-btn {
+            background: linear-gradient(45deg, #339933, #FF9933);
+            color: white;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(51, 153, 51, 0.3);
+        }
+
+        .campaign-creation {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .campaign-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .campaign-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            color: #333333;
+        }
+
+        .close-campaign {
+            background: #F5F5F5;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .campaign-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            padding: 12px 16px;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #339933;
+            box-shadow: 0 0 0 3px rgba(51, 153, 51, 0.1);
+        }
+
+        .form-textarea {
+            padding: 12px 16px;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            background: white;
+            resize: vertical;
+            min-height: 80px;
+            transition: all 0.3s ease;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #339933;
+            box-shadow: 0 0 0 3px rgba(51, 153, 51, 0.1);
+        }
+
+        .form-select {
+            padding: 12px 16px;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #339933;
+            box-shadow: 0 0 0 3px rgba(51, 153, 51, 0.1);
+        }
+
+        .create-campaign-btn {
+            background: linear-gradient(45deg, #339933, #FF9933);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .create-campaign-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(51, 153, 51, 0.4);
+        }
+
+        .floating-action {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #339933, #FF9933);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(51, 153, 51, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .floating-action:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(51, 153, 51, 0.4);
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="marketplace-container">
+        <div class="header">
+            <div class="header-content">
+                <button class="back-btn">
+                    <span class="back-icon">←</span>
+                </button>
+                <div class="header-title">Influencer Marketplace</div>
+                <div></div>
+            </div>
+            
+            <div class="search-section">
+                <div class="search-bar">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" placeholder="Search influencers, niches, locations...">
+                </div>
+                <div class="filter-tabs">
+                    <button class="filter-tab active">All</button>
+                    <button class="filter-tab">Music</button>
+                    <button class="filter-tab">Lifestyle</button>
+                    <button class="filter-tab">Fashion</button>
+                    <button class="filter-tab">Food</button>
+                    <button class="filter-tab">Travel</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="influencers-grid" id="influencersGrid">
+                <div class="influencer-card" onclick="viewInfluencerProfile('Music Maven')">
+                    <div class="influencer-header">
+                        <div class="influencer-avatar">MM</div>
+                        <div class="influencer-info">
+                            <div class="influencer-name">Music Maven</div>
+                            <div class="influencer-niche">Music & Entertainment</div>
+                            <div class="influencer-location">📍 Mumbai, India</div>
+                        </div>
+                    </div>
+                    
+                    <div class="influencer-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">125K</div>
+                            <div class="stat-label">Followers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4.2%</div>
+                            <div class="stat-label">Engagement</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">₹25K</div>
+                            <div class="stat-label">Rate/Post</div>
+                        </div>
+                    </div>
+                    
+                    <div class="influencer-tags">
+                        <span class="tag">Punjabi Music</span>
+                        <span class="tag">Bollywood</span>
+                        <span class="tag">Live Shows</span>
+                    </div>
+                    
+                    <div class="pricing-section">
+                        <div class="pricing-title">Pricing</div>
+                        <div class="pricing-grid">
+                            <div class="pricing-item">
+                                <div class="pricing-amount">₹25,000</div>
+                                <div class="pricing-type">Per Post</div>
+                            </div>
+                            <div class="pricing-item">
+                                <div class="pricing-amount">₹15,000</div>
+                                <div class="pricing-type">Story</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="influencer-actions">
+                        <button class="action-btn view-btn">View Profile</button>
+                        <button class="action-btn book-btn">Book Now</button>
+                    </div>
+                </div>
+
+                <div class="influencer-card" onclick="viewInfluencerProfile('Punjabi Vibes')">
+                    <div class="influencer-header">
+                        <div class="influencer-avatar">PV</div>
+                        <div class="influencer-info">
+                            <div class="influencer-name">Punjabi Vibes</div>
+                            <div class="influencer-niche">Punjabi Culture & Music</div>
+                            <div class="influencer-location">📍 Chandigarh, India</div>
+                        </div>
+                    </div>
+                    
+                    <div class="influencer-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">89K</div>
+                            <div class="stat-label">Followers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5.8%</div>
+                            <div class="stat-label">Engagement</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">₹18K</div>
+                            <div class="stat-label">Rate/Post</div>
+                        </div>
+                    </div>
+                    
+                    <div class="influencer-tags">
+                        <span class="tag">Punjabi Folk</span>
+                        <span class="tag">Cultural</span>
+                        <span class="tag">Traditional</span>
+                    </div>
+                    
+                    <div class="pricing-section">
+                        <div class="pricing-title">Pricing</div>
+                        <div class="pricing-grid">
+                            <div class="pricing-item">
+                                <div class="pricing-amount">₹18,000</div>
+                                <div class="pricing-type">Per Post</div>
+                            </div>
+                            <div class="pricing-item">
+                                <div class="pricing-amount">₹12,000</div>
+                                <div class="pricing-type">Story</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="influencer-actions">
+                        <button class="action-btn view-btn">View Profile</button>
+                        <button class="action-btn book-btn">Book Now</button>
+                    </div>
+                </div>
+
+                <div class="influencer-card" onclick="viewInfluencerProfile('Bollywood Beats')">
+                    <div class="influencer-header">
+                        <div class="influencer-avatar">BB</div>
+                        <div class="influencer-info">
+                            <div class="influencer-name">Bollywood Beats</div>
+                            <div class="influencer-niche">Bollywood Music & Reviews</div>
+                            <div class="influencer-location">📍 Delhi, India</div>
+                        </div>
+                    </div>
+                    
+                    <div class="influencer-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">256K</div>
+                            <div class="stat-label">Followers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">3.9%</div>
+                            <div class="stat-label">Engagement</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">₹45K</div>
+                            <div class="stat-label">Rate/Post</div>
+                        </div>
+                    </div>
+                    
+                    <div class="influencer-tags">
+                        <span class="tag">Bollywood</span>
+                        <span class="tag">Music Reviews</span>
+                        <span class="tag">Entertainment</span>
+                    </div>
+                    
+                    <div class="pricing-section">
+                        <div class="pricing-title">Pricing</div>
+                        <div class="pricing-grid">
+                            <div class="pricing-item">
+                                <div class="pricing-amount">₹45,000</div>
+                                <div class="pricing-type">Per Post</div>
+                            </div>
+                            <div class="pricing-item">
+                                <div class="pricing-amount">₹25,000</div>
+                                <div class="pricing-type">Story</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="influencer-actions">
+                        <button class="action-btn view-btn">View Profile</button>
+                        <button class="action-btn book-btn">Book Now</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="campaign-creation" id="campaignCreation">
+                <div class="campaign-header">
+                    <div class="campaign-title">Create Campaign</div>
+                    <button class="close-campaign" onclick="closeCampaignCreation()">×</button>
+                </div>
+                
+                <div class="campaign-form">
+                    <div class="form-group">
+                        <label class="form-label">Campaign Title</label>
+                        <input type="text" class="form-input" placeholder="Enter campaign title">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-textarea" placeholder="Describe your campaign goals and requirements"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Budget Range</label>
+                        <select class="form-select">
+                            <option value="">Select budget range</option>
+                            <option value="10k-25k">₹10,000 - ₹25,000</option>
+                            <option value="25k-50k">₹25,000 - ₹50,000</option>
+                            <option value="50k-100k">₹50,000 - ₹1,00,000</option>
+                            <option value="100k+">₹1,00,000+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Campaign Type</label>
+                        <select class="form-select">
+                            <option value="">Select campaign type</option>
+                            <option value="post">Instagram Post</option>
+                            <option value="story">Instagram Story</option>
+                            <option value="reel">Instagram Reel</option>
+                            <option value="youtube">YouTube Video</option>
+                            <option value="collaboration">Long-term Collaboration</option>
+                        </select>
+                    </div>
+                    
+                    <button class="create-campaign-btn">Create Campaign</button>
+                </div>
+            </div>
+        </div>
+
+        <button class="floating-action" onclick="openCampaignCreation()">+</button>
+    </div>
+
+    <script>
+        function viewInfluencerProfile(influencerName) {
+            alert(`Viewing profile of ${influencerName}`);
+        }
+
+        function openCampaignCreation() {
+            document.getElementById('campaignCreation').style.display = 'block';
+            document.getElementById('influencersGrid').style.display = 'none';
+        }
+
+        function closeCampaignCreation() {
+            document.getElementById('campaignCreation').style.display = 'none';
+            document.getElementById('influencersGrid').style.display = 'grid';
+        }
+
+        // Filter tabs functionality
+        document.querySelectorAll('.filter-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Here you would filter the influencers based on the selected tab
+                console.log('Filtering by:', this.textContent);
+            });
+        });
+
+        // Book button functionality
+        document.querySelectorAll('.book-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                alert('Opening booking form...');
+            });
+        });
+
+        // View profile button functionality
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                alert('Opening influencer profile...');
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const influencerCards = document.querySelectorAll('.influencer-card');
+            
+            influencerCards.forEach(card => {
+                const influencerName = card.querySelector('.influencer-name').textContent.toLowerCase();
+                const influencerNiche = card.querySelector('.influencer-niche').textContent.toLowerCase();
+                const influencerLocation = card.querySelector('.influencer-location').textContent.toLowerCase();
+                
+                if (influencerName.includes(searchTerm) || influencerNiche.includes(searchTerm) || influencerLocation.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Campaign creation form submission
+        document.querySelector('.create-campaign-btn').addEventListener('click', function() {
+            alert('Campaign created successfully!');
+            closeCampaignCreation();
+        });
+    </script>
+</body>
+</html>

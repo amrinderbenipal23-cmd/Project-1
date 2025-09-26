@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Punjabi Music Collaboration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&family=Noto+Sans+Punjabi:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 390px;
+            height: 844px;
+            margin: 0 auto;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #FFF5E1 0%, #FF9933 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #FF9933, #CC0033);
+            padding: 15px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .welcome-section {
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .user-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .user-role {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .credit-balance {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .credit-amount {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .add-credits {
+            background: rgba(255, 255, 255, 0.3);
+            border: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-credits:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .quick-access {
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            color: #333333;
+            margin-bottom: 12px;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .module-card {
+            background: white;
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FF9933, #339933);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+
+        .module-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .module-icon {
+            width: 24px;
+            height: 24px;
+            margin: 0 auto 4px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+        }
+
+        .module-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 9px;
+            color: #333333;
+            margin-bottom: 1px;
+        }
+
+        .module-description {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 7px;
+            color: #666666;
+            line-height: 1.1;
+        }
+
+        .notifications-section {
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .notification-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .notification-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 2px;
+        }
+
+        .notification-time {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .bottom-navigation {
+            background: white;
+            border-top: 1px solid #E0E0E0;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 8px;
+            border-radius: 8px;
+        }
+
+        .nav-item.active {
+            background: #FFF5E1;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+            color: #999999;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active .nav-icon {
+            color: #FF9933;
+        }
+
+        .nav-label {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 10px;
+            color: #999999;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active .nav-label {
+            color: #FF9933;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF9933, #CC0033);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            color: #333333;
+            margin-bottom: 2px;
+        }
+
+        .profile-role {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .settings-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .settings-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .settings-icon {
+            color: white;
+            font-size: 18px;
+        }
+
+        /* Module-specific colors - Extended palette */
+        .module-card:nth-child(1) .module-icon { background: linear-gradient(135deg, #FF9933, #CC0033); }
+        .module-card:nth-child(2) .module-icon { background: linear-gradient(135deg, #339933, #FF9933); }
+        .module-card:nth-child(3) .module-icon { background: linear-gradient(135deg, #3366CC, #339933); }
+        .module-card:nth-child(4) .module-icon { background: linear-gradient(135deg, #CC0033, #3366CC); }
+        .module-card:nth-child(5) .module-icon { background: linear-gradient(135deg, #9C27B0, #FF9933); }
+        .module-card:nth-child(6) .module-icon { background: linear-gradient(135deg, #FF5722, #9C27B0); }
+        .module-card:nth-child(7) .module-icon { background: linear-gradient(135deg, #607D8B, #FF5722); }
+        .module-card:nth-child(8) .module-icon { background: linear-gradient(135deg, #795548, #607D8B); }
+        .module-card:nth-child(9) .module-icon { background: linear-gradient(135deg, #FF9800, #795548); }
+        .module-card:nth-child(10) .module-icon { background: linear-gradient(135deg, #4CAF50, #FF9800); }
+        .module-card:nth-child(11) .module-icon { background: linear-gradient(135deg, #2196F3, #4CAF50); }
+        .module-card:nth-child(12) .module-icon { background: linear-gradient(135deg, #E91E63, #2196F3); }
+        .module-card:nth-child(13) .module-icon { background: linear-gradient(135deg, #673AB7, #E91E63); }
+        .module-card:nth-child(14) .module-icon { background: linear-gradient(135deg, #3F51B5, #673AB7); }
+        .module-card:nth-child(15) .module-icon { background: linear-gradient(135deg, #00BCD4, #3F51B5); }
+        .module-card:nth-child(16) .module-icon { background: linear-gradient(135deg, #009688, #00BCD4); }
+        .module-card:nth-child(17) .module-icon { background: linear-gradient(135deg, #8BC34A, #009688); }
+        .module-card:nth-child(18) .module-icon { background: linear-gradient(135deg, #CDDC39, #8BC34A); }
+        .module-card:nth-child(19) .module-icon { background: linear-gradient(135deg, #FFEB3B, #CDDC39); }
+        .module-card:nth-child(20) .module-icon { background: linear-gradient(135deg, #FFC107, #FFEB3B); }
+        .module-card:nth-child(21) .module-icon { background: linear-gradient(135deg, #FF9800, #FFC107); }
+        .module-card:nth-child(22) .module-icon { background: linear-gradient(135deg, #FF5722, #FF9800); }
+        .module-card:nth-child(23) .module-icon { background: linear-gradient(135deg, #795548, #FF5722); }
+        .module-card:nth-child(24) .module-icon { background: linear-gradient(135deg, #607D8B, #795548); }
+        .module-card:nth-child(25) .module-icon { background: linear-gradient(135deg, #9E9E9E, #607D8B); }
+        .module-card:nth-child(26) .module-icon { background: linear-gradient(135deg, #FF9933, #9E9E9E); }
+        .module-card:nth-child(27) .module-icon { background: linear-gradient(135deg, #339933, #FF9933); }
+        .module-card:nth-child(28) .module-icon { background: linear-gradient(135deg, #3366CC, #339933); }
+
+        .notification-item:nth-child(1) .notification-icon { background: #FF9933; }
+        .notification-item:nth-child(2) .notification-icon { background: #339933; }
+        .notification-item:nth-child(3) .notification-icon { background: #3366CC; }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="header">
+            <div class="welcome-section">
+                <div class="welcome-text">Welcome back!</div>
+                <div class="user-name">Amar Singh</div>
+                <div class="user-role">Music Producer</div>
+            </div>
+            
+            <div class="credit-balance">
+                <div>
+                    <div class="credit-amount">500 Credits</div>
+                </div>
+                <button class="add-credits">+ Add</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="profile-section">
+                <div class="profile-avatar">AS</div>
+                <div class="profile-info">
+                    <div class="profile-name">Amar Singh</div>
+                    <div class="profile-role">Music Producer • Punjabi</div>
+                </div>
+                <button class="settings-btn">
+                    <span class="settings-icon">⚙️</span>
+                </button>
+            </div>
+
+            <div class="quick-access">
+                <div class="section-title">All Features</div>
+                <div class="modules-grid">
+                    <!-- Music Creation & Collaboration -->
+                    <div class="module-card" onclick="navigateToModule('collaboration')">
+                        <div class="module-icon">🤝</div>
+                        <div class="module-title">Collaboration</div>
+                        <div class="module-description">Find & Connect</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('matchmaking')">
+                        <div class="module-icon">🎯</div>
+                        <div class="module-title">Matchmaking</div>
+                        <div class="module-description">Smart Matching</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('workspace')">
+                        <div class="module-icon">💼</div>
+                        <div class="module-title">Workspace</div>
+                        <div class="module-description">Collaborate</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('projects')">
+                        <div class="module-icon">🎵</div>
+                        <div class="module-title">Projects</div>
+                        <div class="module-description">Music Projects</div>
+                    </div>
+
+                    <!-- Influencer & Promotion -->
+                    <div class="module-card" onclick="navigateToModule('influencer')">
+                        <div class="module-icon">📱</div>
+                        <div class="module-title">Influencers</div>
+                        <div class="module-description">Promotion</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('campaigns')">
+                        <div class="module-icon">📈</div>
+                        <div class="module-title">Campaigns</div>
+                        <div class="module-description">Marketing</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('youtube')">
+                        <div class="module-icon">📺</div>
+                        <div class="module-title">YouTube</div>
+                        <div class="module-description">Video Promotion</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('social')">
+                        <div class="module-icon">📲</div>
+                        <div class="module-title">Social Media</div>
+                        <div class="module-description">Social Promotion</div>
+                    </div>
+
+                    <!-- Live Shows & Events -->
+                    <div class="module-card" onclick="navigateToModule('shows')">
+                        <div class="module-icon">🎪</div>
+                        <div class="module-title">Live Shows</div>
+                        <div class="module-description">Book Shows</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('bands')">
+                        <div class="module-icon">🎸</div>
+                        <div class="module-title">Bands</div>
+                        <div class="module-description">Form Bands</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('events')">
+                        <div class="module-icon">🎉</div>
+                        <div class="module-title">Events</div>
+                        <div class="module-description">Industry Events</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('launches')">
+                        <div class="module-icon">🚀</div>
+                        <div class="module-title">Launches</div>
+                        <div class="module-description">Music Launches</div>
+                    </div>
+
+                    <!-- Professional Services -->
+                    <div class="module-card" onclick="navigateToModule('studios')">
+                        <div class="module-icon">🎛️</div>
+                        <div class="module-title">Studios</div>
+                        <div class="module-description">Recording</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('labels')">
+                        <div class="module-icon">🏢</div>
+                        <div class="module-title">Labels</div>
+                        <div class="module-description">Music Labels</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('producers')">
+                        <div class="module-icon">🎧</div>
+                        <div class="module-title">Producers</div>
+                        <div class="module-description">Music Producers</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('engineers')">
+                        <div class="module-icon">🔧</div>
+                        <div class="module-title">Engineers</div>
+                        <div class="module-description">Sound Engineers</div>
+                    </div>
+
+                    <!-- Creative Services -->
+                    <div class="module-card" onclick="navigateToModule('lyricists')">
+                        <div class="module-icon">✍️</div>
+                        <div class="module-title">Lyricists</div>
+                        <div class="module-description">Song Writers</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('composers')">
+                        <div class="module-icon">🎼</div>
+                        <div class="module-title">Composers</div>
+                        <div class="module-description">Music Composers</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('singers')">
+                        <div class="module-icon">🎤</div>
+                        <div class="module-title">Singers</div>
+                        <div class="module-description">Vocal Artists</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('musicians')">
+                        <div class="module-icon">🎹</div>
+                        <div class="module-title">Musicians</div>
+                        <div class="module-description">Instrumentalists</div>
+                    </div>
+
+                    <!-- Business & Finance -->
+                    <div class="module-card" onclick="navigateToModule('contracts')">
+                        <div class="module-icon">📋</div>
+                        <div class="module-title">Contracts</div>
+                        <div class="module-description">Legal Docs</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('payments')">
+                        <div class="module-icon">💳</div>
+                        <div class="module-title">Payments</div>
+                        <div class="module-description">Financial</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('analytics')">
+                        <div class="module-icon">📊</div>
+                        <div class="module-title">Analytics</div>
+                        <div class="module-description">Performance</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('reports')">
+                        <div class="module-icon">📈</div>
+                        <div class="module-title">Reports</div>
+                        <div class="module-description">Business Reports</div>
+                    </div>
+
+                    <!-- Communication & Support -->
+                    <div class="module-card" onclick="navigateToModule('chat')">
+                        <div class="module-icon">💬</div>
+                        <div class="module-title">Chat</div>
+                        <div class="module-description">Messaging</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('calls')">
+                        <div class="module-icon">📞</div>
+                        <div class="module-title">Video Calls</div>
+                        <div class="module-description">Connect</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('support')">
+                        <div class="module-icon">🆘</div>
+                        <div class="module-title">Support</div>
+                        <div class="module-description">Help Center</div>
+                    </div>
+
+                    <div class="module-card" onclick="navigateToModule('community')">
+                        <div class="module-icon">👥</div>
+                        <div class="module-title">Community</div>
+                        <div class="module-description">Network</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="notifications-section">
+                <div class="section-title">Recent Activity</div>
+                <div class="notification-item">
+                    <div class="notification-icon">🎵</div>
+                    <div class="notification-content">
+                        <div class="notification-title">New collaboration request from Raj Kaur</div>
+                        <div class="notification-time">2 hours ago</div>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-icon">📱</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Influencer campaign completed</div>
+                        <div class="notification-time">1 day ago</div>
+                    </div>
+                </div>
+                <div class="notification-item">
+                    <div class="notification-icon">🎪</div>
+                    <div class="notification-content">
+                        <div class="notification-title">Live show booking confirmed</div>
+                        <div class="notification-time">3 days ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-navigation">
+            <div class="nav-item active">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Home</div>
+            </div>
+            <div class="nav-item" onclick="navigateToModule('collaboration')">
+                <div class="nav-icon">🤝</div>
+                <div class="nav-label">Collaborate</div>
+            </div>
+            <div class="nav-item" onclick="navigateToModule('influencer')">
+                <div class="nav-icon">📱</div>
+                <div class="nav-label">Promote</div>
+            </div>
+            <div class="nav-item" onclick="navigateToModule('shows')">
+                <div class="nav-icon">🎪</div>
+                <div class="nav-label">Shows</div>
+            </div>
+            <div class="nav-item" onclick="navigateToModule('events')">
+                <div class="nav-icon">🎉</div>
+                <div class="nav-label">Events</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function navigateToModule(module) {
+            const moduleNames = {
+                'collaboration': 'Music Creation & Collaboration',
+                'matchmaking': 'Smart Matchmaking System',
+                'workspace': 'Collaborative Workspace',
+                'projects': 'Music Projects',
+                'influencer': 'Influencer Promotion',
+                'campaigns': 'Marketing Campaigns',
+                'youtube': 'YouTube Promotion',
+                'social': 'Social Media Marketing',
+                'shows': 'Live Shows & Bookings',
+                'bands': 'Band Formation',
+                'events': 'Industry Events',
+                'launches': 'Music Launches',
+                'studios': 'Recording Studios',
+                'labels': 'Music Labels',
+                'producers': 'Music Producers',
+                'engineers': 'Sound Engineers',
+                'lyricists': 'Song Lyricists',
+                'composers': 'Music Composers',
+                'singers': 'Vocal Artists',
+                'musicians': 'Instrumentalists',
+                'contracts': 'Legal Contracts',
+                'payments': 'Payment System',
+                'analytics': 'Performance Analytics',
+                'reports': 'Business Reports',
+                'chat': 'Messaging System',
+                'calls': 'Video Calls',
+                'support': 'Help & Support',
+                'community': 'Community Network'
+            };
+            
+            const moduleName = moduleNames[module] || module;
+            alert(`Navigating to ${moduleName}...`);
+            
+            // Add actual navigation logic here
+            // switch(module) {
+            //     case 'collaboration':
+            //         window.location.href = 'matchmaking_collaboration.html';
+            //         break;
+            //     case 'influencer':
+            //         window.location.href = 'influencer_marketplace.html';
+            //         break;
+            //     case 'shows':
+            //         window.location.href = 'live_shows.html';
+            //         break;
+            //     case 'events':
+            //         window.location.href = 'events_hub.html';
+            //         break;
+            //     // Add more cases as needed
+            // }
+        }
+
+        // Add hover effects to module cards
+        document.querySelectorAll('.module-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-4px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Navigation item clicks
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Settings button
+        document.querySelector('.settings-btn').addEventListener('click', function() {
+            alert('Opening settings...');
+            // window.location.href = 'settings.html';
+        });
+
+        // Add credits button
+        document.querySelector('.add-credits').addEventListener('click', function() {
+            alert('Opening credit packages...');
+            // window.location.href = 'credits.html';
+        });
+    </script>
+</body>
+</html>
