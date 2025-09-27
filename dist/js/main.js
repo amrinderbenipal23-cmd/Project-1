@@ -1,263 +1,349 @@
-// Punjabi Music Collaboration Platform - Main JavaScript
+/**
+ * Punjabi Music Collaboration Platform - Main Application
+ * Professional, modular JavaScript architecture
+ */
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Navigation functionality
-    initNavigation();
-    
-    // Smooth scrolling
-    initSmoothScrolling();
-    
-    // Mobile menu toggle
-    initMobileMenu();
-    
-    // Screen preview interactions
-    initScreenPreviews();
-    
-    // Asset downloads
-    initAssetDownloads();
-});
+import { apiService } from './api.js';
+import { appState, actions, selectors } from './state.js';
+import { throttle, smoothScrollTo, storage } from './utils.js';
 
-function initNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('section[id]');
-    
-    // Update active nav link on scroll
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 100;
-            const sectionHeight = section.offsetHeight;
-            if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
-                current = section.getAttribute('id');
-            }
-        });
-        
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
-        });
-    });
-    
-    // Handle nav link clicks
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            
-            if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-}
+/**
+ * Application Class
+ * Main application controller
+ */
+class PunjabiMusicApp {
+  constructor() {
+    this.isInitialized = false;
+    this.eventListeners = new Map();
+    this.modules = new Map();
+  }
 
-function initSmoothScrolling() {
-    // Smooth scroll for all anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-}
+  /**
+   * Initialize the application
+   */
+  async init() {
+    if (this.isInitialized) {return;}
 
-function initMobileMenu() {
-    const navToggle = document.getElementById('navToggle');
-    const navLinks = document.querySelector('.nav-links');
-    
-    if (navToggle && navLinks) {
-        navToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            navToggle.classList.toggle('active');
-        });
-        
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                navToggle.classList.remove('active');
-            });
-        });
+    try {
+      // Initialize core modules
+      await this.initializeCoreModules();
+      
+      // Setup event listeners
+      this.setupEventListeners();
+      
+      // Initialize UI components
+      this.initializeComponents();
+      
+      // Load initial data
+      await this.loadInitialData();
+      
+      this.isInitialized = true;
+      console.log('Punjabi Music App initialized successfully');
+    } catch (error) {
+      console.error('Failed to initialize app:', error);
+      actions.setError('Failed to initialize application');
     }
-}
+  }
 
-function initScreenPreviews() {
-    const screenCards = document.querySelectorAll('.screen-card');
+  /**
+   * Initialize core modules
+   */
+  async initializeCoreModules() {
+    // Register modules
+    this.modules.set('navigation', new NavigationModule());
+    this.modules.set('dashboard', new DashboardModule());
+    this.modules.set('matchmaking', new MatchmakingModule());
+    this.modules.set('collaboration', new CollaborationModule());
+    this.modules.set('settings', new SettingsModule());
+    this.modules.set('notifications', new NotificationModule());
+  }
+
+  /**
+   * Setup global event listeners
+   */
+  setupEventListeners() {
+    // Window events
+    this.addEventListener(window, 'resize', throttle(this.handleResize.bind(this), 250));
+    this.addEventListener(window, 'scroll', throttle(this.handleScroll.bind(this), 100));
+    this.addEventListener(window, 'beforeunload', this.handleBeforeUnload.bind(this));
+
+    // State change listeners
+    appState.on('stateChange', this.handleStateChange.bind(this));
+    appState.on('stateReset', this.handleStateReset.bind(this));
+  }
+
+  /**
+   * Initialize UI components
+   */
+  initializeComponents() {
+    // Initialize each module
+    this.modules.forEach((module, _name) => {
+      if (module.init) {
+        module.init();
+      }
+    });
+  }
+
+  /**
+   * Load initial application data
+   */
+  async loadInitialData() {
+    actions.setLoading(true);
     
-    screenCards.forEach(card => {
-        const iframe = card.querySelector('iframe');
-        const viewButton = card.querySelector('.btn-outline');
-        
-        if (iframe && viewButton) {
-            // Add loading state
-            iframe.addEventListener('load', () => {
-                iframe.style.opacity = '1';
-            });
-            
-            // Handle view button click
-            viewButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                const href = viewButton.getAttribute('href');
-                if (href) {
-                    window.open(href, '_blank');
-                }
-            });
-        }
-    });
-}
+    try {
+      // Load user data if authenticated
+      if (selectors.isAuthenticated()) {
+        await this.loadUserData();
+      }
+      
+      // Load settings
+      await this.loadSettings();
+      
+      actions.setLoading(false);
+    } catch (error) {
+      console.error('Error loading initial data:', error);
+      actions.setError('Failed to load application data');
+      actions.setLoading(false);
+    }
+  }
 
-function initAssetDownloads() {
-    const downloadButtons = document.querySelectorAll('a[download]');
+  /**
+   * Load user data
+   */
+  async loadUserData() {
+    try {
+      const user = await apiService.getUser(selectors.user()?.id);
+      if (user) {
+        actions.login(user);
+      }
+    } catch (error) {
+      console.error('Error loading user data:', error);
+    }
+  }
+
+  /**
+   * Load application settings
+   */
+  async loadSettings() {
+    try {
+      const settings = storage.get('appSettings', {});
+      actions.updateSettings(settings);
+    } catch (error) {
+      console.error('Error loading settings:', error);
+    }
+  }
+
+  /**
+   * Handle window resize
+   */
+  handleResize() {
+    // Notify modules of resize
+    this.modules.forEach(module => {
+      if (module.handleResize) {
+        module.handleResize();
+      }
+    });
+  }
+
+  /**
+   * Handle window scroll
+   */
+  handleScroll() {
+    // Update navigation based on scroll position
+    const navigationModule = this.modules.get('navigation');
+    if (navigationModule && navigationModule.updateActiveSection) {
+      navigationModule.updateActiveSection();
+    }
+  }
+
+  /**
+   * Handle before unload
+   */
+  handleBeforeUnload(_event) {
+    // Save any pending data
+    this.savePendingData();
+  }
+
+  /**
+   * Handle state changes
+   */
+  handleStateChange({ key, value, oldValue }) {
+    // Notify modules of state changes
+    this.modules.forEach(module => {
+      if (module.handleStateChange) {
+        module.handleStateChange(key, value, oldValue);
+      }
+    });
+  }
+
+  /**
+   * Handle state reset
+   */
+  handleStateReset() {
+    // Reinitialize modules if needed
+    this.modules.forEach(module => {
+      if (module.handleStateReset) {
+        module.handleStateReset();
+      }
+    });
+  }
+
+  /**
+   * Add event listener with cleanup tracking
+   */
+  addEventListener(element, event, handler) {
+    element.addEventListener(event, handler);
     
-    downloadButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            // Add download animation
-            button.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                button.style.transform = 'scale(1)';
-            }, 150);
-        });
+    if (!this.eventListeners.has(element)) {
+      this.eventListeners.set(element, []);
+    }
+    this.eventListeners.get(element).push({ event, handler });
+  }
+
+  /**
+   * Cleanup event listeners
+   */
+  cleanup() {
+    this.eventListeners.forEach((listeners, element) => {
+      listeners.forEach(({ event, handler }) => {
+        element.removeEventListener(event, handler);
+      });
     });
+    this.eventListeners.clear();
+  }
+
+  /**
+   * Save pending data
+   */
+  savePendingData() {
+    // Save current state
+    const currentState = appState.getState();
+    storage.set('appState', currentState);
+  }
 }
 
-// Utility functions
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
+/**
+ * Navigation Module
+ */
+class NavigationModule {
+  init() {
+    this.navLinks = document.querySelectorAll('.nav-link');
+    this.sections = document.querySelectorAll('section[id]');
+    this.setupNavigation();
+  }
+
+  setupNavigation() {
+    this.navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        this.navigateToSection(targetId);
+      });
+    });
+  }
+
+  navigateToSection(sectionId) {
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+      smoothScrollTo(targetSection, 100);
+      actions.navigateTo(sectionId);
+    }
+  }
+
+  updateActiveSection() {
+    let current = '';
+    this.sections.forEach(section => {
+      const sectionTop = section.offsetTop - 100;
+      const sectionHeight = section.offsetHeight;
+      if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    this.navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  }
 }
 
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+/**
+ * Dashboard Module
+ */
+class DashboardModule {
+  init() {
+    this.setupDashboard();
+  }
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
+  setupDashboard() {
+    // Setup dashboard functionality
+    console.log('Dashboard module initialized');
+  }
+}
 
-// Observe elements for animation
+/**
+ * Matchmaking Module
+ */
+class MatchmakingModule {
+  init() {
+    this.setupMatchmaking();
+  }
+
+  setupMatchmaking() {
+    // Setup matchmaking functionality
+    console.log('Matchmaking module initialized');
+  }
+}
+
+/**
+ * Collaboration Module
+ */
+class CollaborationModule {
+  init() {
+    this.setupCollaboration();
+  }
+
+  setupCollaboration() {
+    // Setup collaboration functionality
+    console.log('Collaboration module initialized');
+  }
+}
+
+/**
+ * Settings Module
+ */
+class SettingsModule {
+  init() {
+    this.setupSettings();
+  }
+
+  setupSettings() {
+    // Setup settings functionality
+    console.log('Settings module initialized');
+  }
+}
+
+/**
+ * Notification Module
+ */
+class NotificationModule {
+  init() {
+    this.setupNotifications();
+  }
+
+  setupNotifications() {
+    // Setup notification functionality
+    console.log('Notification module initialized');
+  }
+}
+
+// Initialize application when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.feature-card, .screen-card, .asset-card');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
+  const app = new PunjabiMusicApp();
+  app.init();
+  
+  // Make app globally available for debugging
+  window.punjabiMusicApp = app;
 });
-
-// Add Punjabi music theme effects
-function addPunjabiEffects() {
-    // Add floating music notes
-    createFloatingNotes();
-    
-    // Add gradient animations
-    animateGradients();
-}
-
-function createFloatingNotes() {
-    const notes = ['♪', '♫', '♪', '♫'];
-    const colors = ['#FF9933', '#339933', '#CC0033', '#3366CC'];
-    
-    setInterval(() => {
-        if (Math.random() > 0.7) {
-            const note = document.createElement('div');
-            note.textContent = notes[Math.floor(Math.random() * notes.length)];
-            note.style.position = 'fixed';
-            note.style.left = Math.random() * window.innerWidth + 'px';
-            note.style.top = '100vh';
-            note.style.color = colors[Math.floor(Math.random() * colors.length)];
-            note.style.fontSize = '24px';
-            note.style.pointerEvents = 'none';
-            note.style.zIndex = '1000';
-            note.style.opacity = '0.6';
-            note.style.animation = 'floatUp 4s linear forwards';
-            
-            document.body.appendChild(note);
-            
-            setTimeout(() => {
-                note.remove();
-            }, 4000);
-        }
-    }, 2000);
-}
-
-function animateGradients() {
-    const gradientElements = document.querySelectorAll('.btn-primary, .hero');
-    
-    gradientElements.forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            element.style.background = 'linear-gradient(45deg, #339933, #FF9933)';
-        });
-        
-        element.addEventListener('mouseleave', () => {
-            element.style.background = 'linear-gradient(45deg, #FF9933, #CC0033)';
-        });
-    });
-}
-
-// Initialize Punjabi effects
-document.addEventListener('DOMContentLoaded', addPunjabiEffects);
-
-// Add CSS for floating animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes floatUp {
-        0% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 0.6;
-        }
-        100% {
-            transform: translateY(-100vh) rotate(360deg);
-            opacity: 0;
-        }
-    }
-    
-    .nav-links.active {
-        display: flex;
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: white;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-        padding: 20px;
-    }
-    
-    @media (max-width: 768px) {
-        .nav-links {
-            display: none;
-        }
-        
-        .nav-links.active {
-            display: flex;
-        }
-    }
-`;
-document.head.appendChild(style);

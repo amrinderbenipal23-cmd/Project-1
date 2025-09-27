@@ -2,404 +2,647 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Punjabi Music Collaboration Platform</title>
-    <meta name="description" content="Vibrant, modern mobile app for Punjabi Music Collaboration Platform">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Punjabi Music</title>
+    <meta name="description" content="Connect, collaborate, and create music with Punjabi artists worldwide">
     <meta name="theme-color" content="#FF9933">
+    
+    <!-- PWA Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Punjabi Music">
-    <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="apple-touch-icon" href="assets/logo.svg">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&family=Noto+Sans+Punjabi:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
     <link rel="stylesheet" href="styles/main.css">
-</head>
-<body>
-    <div id="app">
-        <!-- Navigation -->
-        <nav class="main-nav">
-            <div class="nav-container">
-                <div class="nav-brand">
-                    <img src="assets/logo.svg" alt="Punjabi Music Collaboration" class="nav-logo">
-                    <span class="nav-title">Punjabi Music</span>
-                </div>
-                <div class="nav-links">
-                    <a href="#home" class="nav-link active">Home</a>
-                    <a href="#features" class="nav-link">Features</a>
-                    <a href="#screens" class="nav-link">Screens</a>
-                    <a href="#flowcharts" class="nav-link">User Flow</a>
-                    <a href="#assets" class="nav-link">Assets</a>
-                </div>
-                <button class="nav-toggle" id="navToggle">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </nav>
-
-        <!-- Hero Section -->
-        <section id="home" class="hero">
-            <div class="hero-container">
-                <div class="hero-content">
-                    <h1 class="hero-title">Punjabi Music Collaboration Platform</h1>
-                    <p class="hero-subtitle">Connect • Create • Collaborate</p>
-                    <p class="hero-description">
-                        A vibrant mobile app connecting the entire Punjabi music industry ecosystem. 
-                        From artists and producers to influencers and event organizers.
-                    </p>
-                    <div class="hero-actions">
-                        <a href="#screens" class="btn btn-primary">View Screens</a>
-                        <a href="#features" class="btn btn-secondary">Learn More</a>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div class="phone-mockup">
-                        <div class="phone-screen">
-                            <img src="splash_screen.html" alt="App Preview" class="app-preview">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section id="features" class="features">
-            <div class="container">
-                <h2 class="section-title">Platform Features</h2>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🤝</div>
-                        <h3>Music Creation & Collaboration</h3>
-                        <p>Connect with artists, producers, and musicians. Collaborate on projects with our advanced workspace.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📱</div>
-                        <h3>Influencer Marketplace</h3>
-                        <p>Promote your music through our influencer network. Create campaigns and track ROI.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🎪</div>
-                        <h3>Live Shows & Bands</h3>
-                        <p>Book live shows, form bands, and manage events with our comprehensive booking system.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🎉</div>
-                        <h3>Industry Events Hub</h3>
-                        <p>Discover and attend music industry events, launches, and networking opportunities.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Screens Section -->
-        <section id="screens" class="screens">
-            <div class="container">
-                <h2 class="section-title">Mobile App Screens</h2>
-                <div class="screens-grid">
-                    <div class="screen-card">
-                        <h3>Splash Screen</h3>
-                        <div class="screen-preview">
-                            <iframe src="splash_screen.html" width="390" height="844"></iframe>
-                        </div>
-                        <a href="splash_screen.html" class="btn btn-outline" target="_blank">View Full Screen</a>
-                    </div>
-                    <div class="screen-card">
-                        <h3>Authentication</h3>
-                        <div class="screen-preview">
-                            <iframe src="authentication.html" width="390" height="844"></iframe>
-                        </div>
-                        <a href="authentication.html" class="btn btn-outline" target="_blank">View Full Screen</a>
-                    </div>
-                    <div class="screen-card">
-                        <h3>Role Selection</h3>
-                        <div class="screen-preview">
-                            <iframe src="role_selection.html" width="390" height="844"></iframe>
-                        </div>
-                        <a href="role_selection.html" class="btn btn-outline" target="_blank">View Full Screen</a>
-                    </div>
-                    <div class="screen-card">
-                        <h3>Profile Setup</h3>
-                        <div class="screen-preview">
-                            <iframe src="profile_setup.html" width="390" height="844"></iframe>
-                        </div>
-                        <a href="profile_setup.html" class="btn btn-outline" target="_blank">View Full Screen</a>
-                    </div>
-                    <div class="screen-card">
-                        <h3>Dashboard</h3>
-                        <div class="screen-preview">
-                            <iframe src="dashboard.html" width="390" height="844"></iframe>
-                        </div>
-                        <a href="dashboard.html" class="btn btn-outline" target="_blank">View Full Screen</a>
-                    </div>
-                    <div class="screen-card">
-                        <h3>Matchmaking & Collaboration</h3>
-                        <div class="screen-preview">
-                            <iframe src="matchmaking_collaboration.html" width="390" height="844"></iframe>
-                        </div>
-                        <a href="matchmaking_collaboration.html" class="btn btn-outline" target="_blank">View Full Screen</a>
-                    </div>
-                    <div class="screen-card">
-                        <h3>Influencer Marketplace</h3>
-                        <div class="screen-preview">
-                            <iframe src="influencer_marketplace.html" width="390" height="844"></iframe>
-                        </div>
-                        <a href="influencer_marketplace.html" class="btn btn-outline" target="_blank">View Full Screen</a>
-                    </div>
-                    <div class="screen-card">
-                        <h3>Live Shows & Bands</h3>
-                        <div class="screen-preview">
-                            <iframe src="live_shows.html" width="390" height="844"></iframe>
-                        </div>
-                        <a href="live_shows.html" class="btn btn-outline" target="_blank">View Full Screen</a>
-                    </div>
-                    <div class="screen-card">
-                        <h3>Events Hub</h3>
-                        <div class="screen-preview">
-                            <iframe src="events_hub.html" width="390" height="844"></iframe>
-                        </div>
-                        <a href="events_hub.html" class="btn btn-outline" target="_blank">View Full Screen</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- User Flow Section -->
-        <section id="flowcharts" class="flowcharts">
-            <div class="container">
-                <h2 class="section-title">User Flow Documentation</h2>
-                <div class="flowchart-content">
-                    <div class="flowchart-preview">
-                        <img src="assets/user-flow-preview.png" alt="User Flow Preview" class="flowchart-image">
-                    </div>
-                    <div class="flowchart-info">
-                        <h3>Comprehensive User Journeys</h3>
-                        <p>Detailed flowcharts covering all platform modules and user interactions.</p>
-                        <ul class="flow-list">
-                            <li>Onboarding Flow</li>
-                            <li>Music Creation & Collaboration</li>
-                            <li>Influencer Promotion Marketplace</li>
-                            <li>Live Shows & Band Bookings</li>
-                            <li>Industry Events Hub</li>
-                            <li>Payment & Monetization</li>
-                            <li>Communication & Notifications</li>
-                            <li>Analytics & Reporting</li>
-                        </ul>
-                        <a href="user_flowcharts.md" class="btn btn-primary" target="_blank">View Full Documentation</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Assets Section -->
-        <section id="assets" class="assets">
-            <div class="container">
-                <h2 class="section-title">Design Assets</h2>
-                <div class="assets-grid">
-                    <div class="asset-card">
-                        <h3>Logo & Branding</h3>
-                        <div class="asset-preview">
-                            <img src="logo.svg" alt="Platform Logo" class="asset-image">
-                        </div>
-                        <a href="logo.svg" class="btn btn-outline" download>Download SVG</a>
-                    </div>
-                    <div class="asset-card">
-                        <h3>Role Icons</h3>
-                        <div class="asset-preview">
-                            <img src="role_icons.svg" alt="Role Icons" class="asset-image">
-                        </div>
-                        <a href="role_icons.svg" class="btn btn-outline" download>Download SVG</a>
-                    </div>
-                    <div class="asset-card">
-                        <h3>UI Components</h3>
-                        <div class="asset-preview">
-                            <img src="ui_components.svg" alt="UI Components" class="asset-image">
-                        </div>
-                        <a href="ui_components.svg" class="btn btn-outline" download>Download SVG</a>
-                    </div>
-                    <div class="asset-card">
-                        <h3>Navigation Icons</h3>
-                        <div class="asset-preview">
-                            <img src="navigation_icons.svg" alt="Navigation Icons" class="asset-image">
-                        </div>
-                        <a href="navigation_icons.svg" class="btn btn-outline" download>Download SVG</a>
-                    </div>
-                    <div class="asset-card">
-                        <h3>Punjabi Patterns</h3>
-                        <div class="asset-preview">
-                            <img src="punjabi_patterns.svg" alt="Punjabi Patterns" class="asset-image">
-                        </div>
-                        <a href="punjabi_patterns.svg" class="btn btn-outline" download>Download SVG</a>
-                    </div>
-                    <div class="asset-card">
-                        <h3>Design System</h3>
-                        <div class="asset-preview">
-                            <div class="color-palette">
-                                <div class="color-swatch" style="background: #FF9933;"></div>
-                                <div class="color-swatch" style="background: #339933;"></div>
-                                <div class="color-swatch" style="background: #CC0033;"></div>
-                                <div class="color-swatch" style="background: #3366CC;"></div>
-                            </div>
-                        </div>
-                        <a href="design_system.md" class="btn btn-outline" target="_blank">View Guidelines</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="container">
-                <div class="footer-content">
-                    <div class="footer-brand">
-                        <img src="assets/logo.svg" alt="Punjabi Music Collaboration" class="footer-logo">
-                        <p>Connecting the Punjabi music industry through collaboration and innovation.</p>
-                    </div>
-                    <div class="footer-links">
-                        <div class="footer-section">
-                            <h4>Platform</h4>
-                            <a href="#features">Features</a>
-                            <a href="#screens">Screens</a>
-                            <a href="#flowcharts">User Flow</a>
-                        </div>
-                        <div class="footer-section">
-                            <h4>Resources</h4>
-                            <a href="design_system.md">Design System</a>
-                            <a href="user_flowcharts.md">Documentation</a>
-                            <a href="README.md">README</a>
-                        </div>
-                        <div class="footer-section">
-                            <h4>Assets</h4>
-                            <a href="logo.svg">Logo</a>
-                            <a href="role_icons.svg">Icons</a>
-                            <a href="punjabi_patterns.svg">Patterns</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p>&copy; 2024 Punjabi Music Collaboration Platform. All rights reserved.</p>
-                </div>
-            </div>
-        </footer>
-    </div>
-
-    <script src="js/main.js"></script>
     
-    <!-- Mobile Detection and Redirect -->
-    <script>
-        // Check if mobile device
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        
-        // Check if PWA is already installed
-        const isPWA = window.matchMedia('(display-mode: standalone)').matches;
-        
-        // Redirect mobile users to the mobile app
-        if (isMobile && !isPWA) {
-            // Show mobile app redirect banner
-            const mobileBanner = document.createElement('div');
-            mobileBanner.innerHTML = `
-                <div style="
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    background: linear-gradient(135deg, #FF9933, #339933);
-                    color: white;
-                    padding: 15px 20px;
-                    text-align: center;
-                    z-index: 10000;
-                    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-                ">
-                    <h3 style="margin-bottom: 10px;">📱 Mobile App Available!</h3>
-                    <p style="margin-bottom: 15px;">Get the full mobile app experience</p>
-                    <button onclick="window.location.href='safari-mobile.html'" style="
-                        background: white;
-                        color: #FF9933;
-                        border: none;
-                        padding: 10px 20px;
-                        border-radius: 20px;
-                        font-weight: bold;
-                        cursor: pointer;
-                        margin-right: 10px;
-                    ">Open Mobile App</button>
-                    <button onclick="this.parentElement.parentElement.remove()" style="
-                        background: rgba(255,255,255,0.2);
-                        color: white;
-                        border: 1px solid white;
-                        padding: 10px 20px;
-                        border-radius: 20px;
-                        cursor: pointer;
-                    ">View Overview</button>
-                </div>
-            `;
-            document.body.appendChild(mobileBanner);
-            
-            // Add padding to body to account for banner
-            document.body.style.paddingTop = '120px';
-        }
-    </script>
-    
-    <!-- PWA Service Worker Registration -->
+    <!-- Service Worker -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('PWA: Service Worker registered successfully', registration);
-                    })
-                    .catch(error => {
-                        console.log('PWA: Service Worker registration failed', error);
-                    });
+                    .then(registration => console.log('SW registered'))
+                    .catch(error => console.log('SW registration failed'));
+            });
+        }
+    </script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">🎵</div>
+            <div class="loading-text">Loading Punjabi Music...</div>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="app" class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="app-logo">🎵</div>
+                    <h1 class="app-title">Punjabi Music</h1>
+                </div>
+                <div class="header-right">
+                    <div class="notifications">
+                        <span class="notification-icon">🔔</span>
+                        <span class="notification-count">0</span>
+                    </div>
+                    <div class="user-profile-mini" onclick="showUserPopup()">
+                        <img class="user-avatar" src="assets/user-avatar.png" alt="User Avatar" id="miniProfileAvatar">
+                        <span class="user-name" id="miniProfileName">Guest User</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Splash Screen -->
+            <section id="splash" class="screen-content active">
+                <div class="splash-content">
+                    <div class="splash-logo">🎵</div>
+                    <h1 class="splash-title">Punjabi Music</h1>
+                    <p class="splash-subtitle">Connect, collaborate, and create music</p>
+                    <div class="splash-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">🤝</span>
+                            <span class="feature-text">Collaborate</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🎤</span>
+                            <span class="feature-text">Record</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">🎵</span>
+                            <span class="feature-text">Create</span>
+                        </div>
+                    </div>
+                    <button class="get-started-btn" onclick="navigateToScreen('authentication')">Get Started</button>
+                </div>
+            </section>
+
+            <!-- Authentication Screen -->
+            <section id="authentication" class="screen-content">
+                <div class="auth-content">
+                    <div class="auth-header">
+                        <h2>Welcome Back!</h2>
+                        <p>Sign in to continue your musical journey</p>
+                    </div>
+                    <div class="auth-form">
+                        <div class="input-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="Enter your email" class="auth-input">
+                        </div>
+                        <div class="input-group">
+                            <label>Password</label>
+                            <input type="password" placeholder="Enter your password" class="auth-input">
+                        </div>
+                        <button class="auth-btn" onclick="navigateToScreen('role_selection')">Sign In</button>
+                        <div class="auth-links">
+                            <a href="#" class="auth-link">Forgot Password?</a>
+                            <a href="#" class="auth-link">Create Account</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Role Selection Screen -->
+            <section id="role_selection" class="screen-content">
+                <div class="role-content">
+                    <div class="role-header">
+                        <h2>Choose Your Role</h2>
+                        <p>How would you like to contribute to the music community?</p>
+                    </div>
+                    <div class="role-options">
+                        <div class="role-card" onclick="selectRole('vocalist')">
+                            <div class="role-icon">🎤</div>
+                            <h3>Vocalist</h3>
+                            <p>Sing and perform</p>
+                        </div>
+                        <div class="role-card" onclick="selectRole('producer')">
+                            <div class="role-icon">🎛️</div>
+                            <h3>Producer</h3>
+                            <p>Create and mix music</p>
+                        </div>
+                        <div class="role-card" onclick="selectRole('musician')">
+                            <div class="role-icon">🎸</div>
+                            <h3>Musician</h3>
+                            <p>Play instruments</p>
+                        </div>
+                        <div class="role-card" onclick="selectRole('dancer')">
+                            <div class="role-icon">💃</div>
+                            <h3>Dancer</h3>
+                            <p>Dance and perform</p>
+                        </div>
+                    </div>
+                    <button class="continue-btn" onclick="navigateToScreen('profile_setup')">Continue</button>
+            </div>
+        </section>
+
+            <!-- Profile Setup Screen -->
+            <section id="profile_setup" class="screen-content">
+                <div class="profile-setup-content">
+                    <div class="profile-setup-header">
+                        <h2>Complete Your Profile</h2>
+                        <p>Tell us about yourself to find the perfect collaborators</p>
+                    </div>
+                    <div class="profile-setup-form">
+                        <div class="profile-avatar-section">
+                            <div class="profile-avatar">
+                                <img src="assets/user-avatar.png" alt="Profile Avatar">
+                                <button class="change-avatar-btn">📷</button>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Enter your full name" class="profile-input">
+                        </div>
+                        <div class="input-group">
+                            <label>Location</label>
+                            <input type="text" placeholder="City, State" class="profile-input">
+                        </div>
+                        <div class="input-group">
+                            <label>Genre</label>
+                            <select class="profile-input">
+                                <option>Punjabi Pop</option>
+                                <option>Bhangra</option>
+                                <option>Folk</option>
+                                <option>Hip Hop</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Experience Level</label>
+                            <select class="profile-input">
+                                <option>Beginner</option>
+                                <option>Intermediate</option>
+                                <option>Advanced</option>
+                                <option>Professional</option>
+                            </select>
+                        </div>
+                        <button class="complete-profile-btn" onclick="navigateToScreen('dashboard')">Complete Profile</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard Screen -->
+            <section id="dashboard" class="screen-content">
+                <div class="dashboard-header">
+                    <h2 class="dashboard-title">Dashboard</h2>
+                    <p class="dashboard-subtitle">Connect, collaborate, and create music</p>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <div class="quick-action-item" onclick="navigateToModule('collaboration')">
+                        <div class="quick-action-icon">🤝</div>
+                        <span class="quick-action-text">Collaborate</span>
+                    </div>
+                    <div class="quick-action-item" onclick="navigateToModule('discover')">
+                        <div class="quick-action-icon">🔍</div>
+                        <span class="quick-action-text">Discover</span>
+                    </div>
+                    <div class="quick-action-item" onclick="navigateToModule('create')">
+                        <div class="quick-action-icon">➕</div>
+                        <span class="quick-action-text">Create</span>
+                    </div>
+                </div>
+
+                <!-- Features Grid -->
+                <div class="features-grid">
+                    <div class="feature-item" onclick="navigateToModule('collaboration')">
+                        <div class="feature-icon">🤝</div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Collaboration</h3>
+                            <p class="feature-desc">Connect with artists</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" onclick="navigateToModule('songwriting')">
+                        <div class="feature-icon">✍️</div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Songwriting</h3>
+                            <p class="feature-desc">Write songs together</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" onclick="navigateToModule('recording')">
+                        <div class="feature-icon">🎤</div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Recording</h3>
+                            <p class="feature-desc">Record your music</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" onclick="navigateToModule('mixing')">
+                        <div class="feature-icon">🎛️</div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Mixing</h3>
+                            <p class="feature-desc">Mix & master tracks</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" onclick="navigateToModule('remix')">
+                        <div class="feature-icon">🔄</div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Remix</h3>
+                            <p class="feature-desc">Create remixes</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-item" onclick="navigateToModule('live')">
+                        <div class="feature-icon">🎵</div>
+                        <div class="feature-content">
+                            <h3 class="feature-title">Live Shows</h3>
+                            <p class="feature-desc">Perform live</p>
+                        </div>
+                    </div>
+                        </div>
+            </section>
+
+            <!-- Matchmaking Collaboration Screen -->
+            <section id="matchmaking_collaboration" class="screen-content">
+                <div class="matchmaking-content">
+                    <div class="matchmaking-header">
+                        <h2>Find Collaborators</h2>
+                        <p>Discover artists who match your style and vision</p>
+                    </div>
+                    <div class="matchmaking-filters">
+                        <div class="filter-group">
+                            <label>Genre</label>
+                            <select class="filter-select">
+                                <option>All Genres</option>
+                                <option>Punjabi Pop</option>
+                                <option>Bhangra</option>
+                                <option>Folk</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Role</label>
+                            <select class="filter-select">
+                                <option>All Roles</option>
+                                <option>Vocalist</option>
+                                <option>Producer</option>
+                                <option>Musician</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="matches-grid">
+                        <div class="match-card">
+                            <div class="match-avatar">👨‍🎤</div>
+                            <h3>Raj Singh</h3>
+                            <p>Punjabi Pop Singer</p>
+                            <div class="compatibility-score">95% Match</div>
+                            <button class="connect-btn">Connect</button>
+                        </div>
+                        <div class="match-card">
+                            <div class="match-avatar">👩‍🎤</div>
+                            <h3>Priya Kaur</h3>
+                            <p>Bhangra Dancer</p>
+                            <div class="compatibility-score">88% Match</div>
+                            <button class="connect-btn">Connect</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+            <!-- Influencer Marketplace Screen -->
+            <section id="influencer_marketplace" class="screen-content">
+                <div class="marketplace-content">
+                    <div class="marketplace-header">
+                        <h2>Influencer Marketplace</h2>
+                        <p>Connect with influencers to promote your music</p>
+                    </div>
+                    <div class="influencer-categories">
+                        <button class="category-btn active">All</button>
+                        <button class="category-btn">Music</button>
+                        <button class="category-btn">Dance</button>
+                        <button class="category-btn">Lifestyle</button>
+                    </div>
+                    <div class="influencers-grid">
+                        <div class="influencer-card">
+                            <div class="influencer-avatar">📱</div>
+                            <h3>Music Influencer</h3>
+                            <p>500K Followers</p>
+                            <div class="influencer-stats">
+                                <span>⭐ 4.8</span>
+                                <span>📈 2.5M Views</span>
+                            </div>
+                            <button class="collaborate-btn">Collaborate</button>
+                        </div>
+                </div>
+            </div>
+        </section>
+
+            <!-- Live Shows Screen -->
+            <section id="live_shows" class="screen-content">
+                <div class="live-shows-content">
+                    <div class="live-shows-header">
+                        <h2>Live Shows & Events</h2>
+                        <p>Discover and book live performances</p>
+                        </div>
+                    <div class="show-categories">
+                        <button class="show-category-btn active">All Shows</button>
+                        <button class="show-category-btn">Concerts</button>
+                        <button class="show-category-btn">Festivals</button>
+                        <button class="show-category-btn">Private Events</button>
+                    </div>
+                    <div class="shows-grid">
+                        <div class="show-card">
+                            <div class="show-image">🎵</div>
+                            <h3>Punjabi Music Festival</h3>
+                            <p>Delhi, India</p>
+                            <div class="show-details">
+                                <span>📅 Dec 15, 2024</span>
+                                <span>🎫 ₹500</span>
+                            </div>
+                            <button class="book-btn">Book Now</button>
+                        </div>
+                    </div>
+                        </div>
+            </section>
+
+            <!-- Discover Screen -->
+            <section id="discover" class="screen-content">
+                <div class="discover-content">
+                    <div class="discover-header">
+                        <h2>Discover Artists</h2>
+                        <p>Find talented musicians to collaborate with</p>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" placeholder="Search artists, genres, instruments..." class="search-input">
+                        <button class="search-btn">🔍</button>
+                        </div>
+                    <div class="filters">
+                        <button class="filter-btn active">All</button>
+                        <button class="filter-btn">Vocalists</button>
+                        <button class="filter-btn">Producers</button>
+                        <button class="filter-btn">Musicians</button>
+                    </div>
+                    <div class="artists-grid">
+                        <div class="artist-card">
+                            <div class="artist-avatar">👨‍🎤</div>
+                            <h3>Raj Singh</h3>
+                            <p>Punjabi Pop Singer</p>
+                            <div class="artist-stats">
+                                <span>⭐ 4.8</span>
+                                <span>🎵 25 songs</span>
+                            </div>
+                            <button class="connect-btn">Connect</button>
+                        </div>
+                        <div class="artist-card">
+                            <div class="artist-avatar">👩‍🎤</div>
+                            <h3>Priya Kaur</h3>
+                            <p>Bhangra Dancer</p>
+                            <div class="artist-stats">
+                                <span>⭐ 4.9</span>
+                                <span>🎵 18 songs</span>
+                            </div>
+                            <button class="connect-btn">Connect</button>
+                    </div>
+                        <div class="artist-card">
+                            <div class="artist-avatar">👨‍🎹</div>
+                            <h3>Amrit Gill</h3>
+                            <p>Music Producer</p>
+                            <div class="artist-stats">
+                                <span>⭐ 4.7</span>
+                                <span>🎵 32 songs</span>
+                            </div>
+                            <button class="connect-btn">Connect</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+            <!-- Create Screen -->
+            <section id="create" class="screen-content">
+                <div class="create-content">
+                    <div class="create-header">
+                        <h2>Create Music</h2>
+                        <p>Start your musical journey</p>
+                    </div>
+                    <div class="create-options">
+                        <div class="create-option" onclick="navigateToModule('songwriting')">
+                            <div class="option-icon">✍️</div>
+                            <h3>Write Lyrics</h3>
+                            <p>Create beautiful Punjabi lyrics</p>
+                        </div>
+                        <div class="create-option" onclick="navigateToModule('recording')">
+                            <div class="option-icon">🎤</div>
+                            <h3>Record Voice</h3>
+                            <p>Record your vocals</p>
+                        </div>
+                        <div class="create-option" onclick="navigateToModule('mixing')">
+                            <div class="option-icon">🎛️</div>
+                            <h3>Mix & Master</h3>
+                            <p>Professional audio mixing</p>
+                        </div>
+                        <div class="create-option" onclick="navigateToModule('collaboration')">
+                            <div class="option-icon">🤝</div>
+                            <h3>Collaborate</h3>
+                            <p>Work with other artists</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Profile Screen -->
+            <section id="profile" class="screen-content">
+                <div class="profile-content">
+                    <div class="profile-header">
+                        <h2>My Profile</h2>
+                        <p>Manage your account and preferences</p>
+                    </div>
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <img src="assets/user-avatar.png" alt="Profile Avatar">
+                        </div>
+                        <h3>Guest User</h3>
+                        <p>Punjabi Music Artist</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <span class="stat-number">12</span>
+                                <span class="stat-label">Songs</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">8</span>
+                                <span class="stat-label">Collaborations</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">156</span>
+                                <span class="stat-label">Followers</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile-menu">
+                        <div class="menu-item" onclick="showUserPopup()">
+                            <span class="menu-icon">👤</span>
+                            <span>Edit Profile</span>
+                            <span class="menu-arrow">›</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="menu-icon">🎵</span>
+                            <span>My Music</span>
+                            <span class="menu-arrow">›</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="menu-icon">🤝</span>
+                            <span>Collaborations</span>
+                            <span class="menu-arrow">›</span>
+                        </div>
+                        <div class="menu-item">
+                            <span class="menu-icon">⚙️</span>
+                            <span>Settings</span>
+                            <span class="menu-arrow">›</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <div class="nav-item active" data-screen="dashboard" onclick="navigateToScreen('dashboard')">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Home</div>
+            </div>
+            <div class="nav-item" data-screen="discover" onclick="navigateToScreen('discover')">
+                <div class="nav-icon">🔍</div>
+                <div class="nav-label">Discover</div>
+            </div>
+            <div class="nav-item" data-screen="create" onclick="navigateToScreen('create')">
+                <div class="nav-icon">➕</div>
+                <div class="nav-label">Create</div>
+            </div>
+            <div class="nav-item" data-screen="profile" onclick="navigateToScreen('profile')">
+                <div class="nav-icon">👤</div>
+                <div class="nav-label">Profile</div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- User Profile Popup -->
+    <div id="userPopupOverlay" class="user-popup-overlay">
+        <div class="user-popup">
+            <div class="user-popup-header">
+                <h2>User Profile</h2>
+                <button class="close-popup" id="closeUserPopup">&times;</button>
+            </div>
+            <div class="user-popup-body">
+                <p><strong>Name:</strong> <span id="popupUserName">Guest User</span></p>
+                <p><strong>Email:</strong> <span id="popupUserEmail">guest@example.com</span></p>
+                <p><strong>Phone:</strong> <span id="popupUserPhone">+1234567890</span></p>
+                <p><strong>Location:</strong> <span id="popupUserLocation">Punjab, India</span></p>
+                <p><strong>Genre:</strong> <span id="popupUserGenre">Punjabi Pop</span></p>
+            </div>
+            <div class="user-popup-actions">
+                <button class="edit-btn" onclick="editProfile()">Edit Profile</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Alert Container -->
+    <div id="musicAlertContainer" class="music-alert-container"></div>
+    
+    <!-- JavaScript -->
+    <script>
+        // App Navigation
+        function navigateToScreen(screenName) {
+            // Hide all screens
+            document.querySelectorAll('.screen-content').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            
+            // Show selected screen
+            document.getElementById(screenName).classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`[data-screen="${screenName}"]`).classList.add('active');
+        }
+
+        // Module Navigation
+        function navigateToModule(moduleName) {
+            showMusicAlert('🚀 Feature Coming Soon', `${moduleName} feature is under development!`, 'info');
+        }
+
+        // Role Selection
+        function selectRole(role) {
+            document.querySelectorAll('.role-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            event.currentTarget.classList.add('selected');
+            showMusicAlert('Role Selected', `You selected ${role} role!`, 'success');
+        }
+
+        // User Profile Popup
+        function showUserPopup() {
+            document.getElementById('userPopupOverlay').classList.add('visible');
+        }
+
+        function closeUserPopup() {
+            document.getElementById('userPopupOverlay').classList.remove('visible');
+        }
+
+        function editProfile() {
+            const newName = prompt('Enter new display name:', 'Guest User');
+            if (newName && newName.trim() !== '') {
+                document.getElementById('miniProfileName').textContent = newName.trim();
+                document.getElementById('popupUserName').textContent = newName.trim();
+                showMusicAlert('Profile Updated', 'Your display name has been updated!', 'success');
+            }
+        }
+
+        // Music Alert System
+        function showMusicAlert(title, message, type = 'info') {
+            const alertContainer = document.getElementById('musicAlertContainer');
+            const alertBox = document.createElement('div');
+            alertBox.className = `music-alert music-alert-${type}`;
+            alertBox.innerHTML = `
+                <div class="music-alert-header">
+                    <h3>${title}</h3>
+                    <button class="close-music-alert">&times;</button>
+                </div>
+                <p>${message}</p>
+            `;
+            alertContainer.appendChild(alertBox);
+
+            // Auto-close after 5 seconds
+            setTimeout(() => {
+                alertBox.classList.add('hide');
+                alertBox.addEventListener('transitionend', () => alertBox.remove());
+            }, 5000);
+
+            // Close button functionality
+            alertBox.querySelector('.close-music-alert').addEventListener('click', () => {
+                alertBox.classList.add('hide');
+                alertBox.addEventListener('transitionend', () => alertBox.remove());
             });
         }
 
-        // PWA Install Prompt
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            console.log('PWA: Install prompt triggered');
-            e.preventDefault();
-            deferredPrompt = e;
-            
-            // Show install button or banner
-            const installButton = document.createElement('button');
-            installButton.textContent = '📱 Install App';
-            installButton.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: #FF9933;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 25px;
-                font-weight: bold;
-                cursor: pointer;
-                z-index: 1000;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            `;
-            
-            installButton.addEventListener('click', () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then((choiceResult) => {
-                        if (choiceResult.outcome === 'accepted') {
-                            console.log('PWA: User accepted the install prompt');
-                        } else {
-                            console.log('PWA: User dismissed the install prompt');
-                        }
-                        deferredPrompt = null;
-                        installButton.remove();
-                    });
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide loading screen after 2 seconds
+            setTimeout(() => {
+                document.getElementById('loading-screen').classList.add('hidden');
+            }, 2000);
+
+            // Close popup when clicking outside
+            document.getElementById('userPopupOverlay').addEventListener('click', (e) => {
+                if (e.target.id === 'userPopupOverlay') {
+                    closeUserPopup();
                 }
             });
-            
-            document.body.appendChild(installButton);
-        });
 
-        // PWA Install Success
-        window.addEventListener('appinstalled', (evt) => {
-            console.log('PWA: App was installed successfully');
+            // Close popup button
+            document.getElementById('closeUserPopup').addEventListener('click', closeUserPopup);
         });
     </script>
 </body>

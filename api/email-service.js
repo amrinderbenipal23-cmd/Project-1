@@ -2,42 +2,42 @@
 const MailerSend = require('mailersend');
 
 class EmailService {
-    constructor() {
-        this.mailerSend = new MailerSend({
-            apiKey: process.env.MAILERSEND_API_KEY || 'your-mailersend-api-key'
-        });
-    }
+  constructor() {
+    this.mailerSend = new MailerSend({
+      apiKey: process.env.MAILERSEND_API_KEY || 'your-mailersend-api-key'
+    });
+  }
 
-    async sendPasswordResetLink(email, resetToken) {
-        try {
-            const resetLink = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/reset-password?token=${resetToken}`;
+  async sendPasswordResetLink(email, resetToken) {
+    try {
+      const resetLink = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/reset-password?token=${resetToken}`;
             
-            const emailParams = {
-                from: {
-                    email: process.env.FROM_EMAIL || 'noreply@punjabimusic.com',
-                    name: 'Punjabi Music Platform'
-                },
-                to: [
-                    {
-                        email: email,
-                        name: 'User'
-                    }
-                ],
-                subject: 'Reset Your Password - Punjabi Music Platform',
-                html: this.getPasswordResetEmailTemplate(resetLink),
-                text: `Reset your password by clicking this link: ${resetLink}`
-            };
+      const emailParams = {
+        from: {
+          email: process.env.FROM_EMAIL || 'noreply@punjabimusic.com',
+          name: 'Punjabi Music Platform'
+        },
+        to: [
+          {
+            email,
+            name: 'User'
+          }
+        ],
+        subject: 'Reset Your Password - Punjabi Music Platform',
+        html: this.getPasswordResetEmailTemplate(resetLink),
+        text: `Reset your password by clicking this link: ${resetLink}`
+      };
 
-            const response = await this.mailerSend.send(emailParams);
-            return { success: true, messageId: response.messageId };
-        } catch (error) {
-            console.error('Email sending failed:', error);
-            throw new Error('Failed to send reset email');
-        }
+      const response = await this.mailerSend.send(emailParams);
+      return { success: true, messageId: response.messageId };
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      throw new Error('Failed to send reset email');
     }
+  }
 
-    getPasswordResetEmailTemplate(resetLink) {
-        return `
+  getPasswordResetEmailTemplate(resetLink) {
+    return `
         <!DOCTYPE html>
         <html>
         <head>
@@ -95,7 +95,7 @@ class EmailService {
         </body>
         </html>
         `;
-    }
+  }
 }
 
 module.exports = EmailService;
